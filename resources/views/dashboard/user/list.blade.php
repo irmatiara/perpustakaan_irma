@@ -27,6 +27,7 @@
                 <th>No</th>
                 <th>Nama</th>
                 <th>Email</th>
+                <th>Alamat</th>
                 <th>Regitered</th>
                 <th>Edited</th>
                 <th>&nbsp</th>
@@ -36,6 +37,7 @@
                 <td>{{ ($users->currentPage() -1 ) * $users->perPage() + $loop->iteration }}</td>
                 <td>{{$user->name}}</td>
                 <td>{{$user->email}}</td>
+                <td>{{$user->alamat}}</td>
                 <td>{{$user->created_at}}</td>
                 <td>{{$user->updated_at}}</td>
                 <td><a href="{{ url('dashboard/user/edit/'.$user->id) }}" class="btn btn-success btn-sm">Edit</a></td>

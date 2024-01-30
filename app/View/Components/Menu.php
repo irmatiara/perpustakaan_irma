@@ -35,19 +35,34 @@ class Menu extends Component
     public function list(){
         return[
             [
-                'label' => 'Dashboard'
+                'label' => 'Dashboard',
+                'route' => 'dashboard',
+                'icon'  => 'fa-solid fa-house-chimney'
             ],
             [
-                'label' => 'Buku'
+                'label' => 'Movie',
+                'route' => 'dashboard.movies',
+                'icon'  => 'fa-solid fa-users-viewfinder'
             ],
             [
-                'label' => 'Peminjaman'
+                'label' => 'Buku',
+                'route' => 'dashboard.books',
+                'icon'  => 'fa-solid fa-book-bookmark'
             ],
             [
-                'label' => 'Pengembalian'
+                'label' => 'Peminjaman',
+                'route' => 'dashboard.peminjaman',
+                'icon'  => 'fa-solid fa-handshake-simple'
             ],
             [
-                'label' => 'Users'
+                'label' => 'Pengembalian',
+                'route' => 'dashboard.pengembalian',
+                'icon'  => 'fa-solid fa-hand-holding-hand'
+            ],
+            [
+                'label' => 'Users',
+                'route' => 'dashboard.users',
+                'icon'  => 'fa-solid fa-users-line'
             ]
          ];
     }

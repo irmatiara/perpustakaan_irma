@@ -33,6 +33,13 @@
                             @enderror
                         </div>
                         <div class="form-group">
+                            <label for="alamat">Alamat</label>
+                            <input type="text" class="form-control" name="alamat" value="{{ old($user->alamat) ?? $user->alamat }}">
+                            @error('alamat')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
                             <button type="button" onclick="Window.history.back()" class="btn btn-sm btn-secondary">Cancel</button>
                             
                             <button type="submit" class="btn btn-success btn-sm">Update</button>

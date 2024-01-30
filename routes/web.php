@@ -31,4 +31,28 @@ Route::get('/dashboard/users', [App\Http\Controllers\dashboard\UserController::c
 Route::get('/dashboard/user/edit/{id}', [App\Http\Controllers\dashboard\UserController::class, 'edit'])->name('home');
 Route::post('/dashboard/user/update/{id}', [App\Http\Controllers\dashboard\UserController::class, 'update'])->name('home');
 Route::delete('/dashboard/user/delete/{id}', [App\Http\Controllers\dashboard\UserController::class, 'destroy'])->name('home');
+
+//menu
+Route::get('/dashboard', [App\Http\Controllers\dashboard\DashboardController::class, 'index'])->name('dashboard');
+Route::get('/dashboard/movies', [App\Http\Controllers\dashboard\MovieController::class, 'index'])->name('dashboard.movies');
+Route::get('/dashboard/books', [App\Http\Controllers\dashboard\BukuController::class, 'index'])->name('dashboard.books');
+Route::get('/dashboard/peminjaman', [App\Http\Controllers\dashboard\PeminjamanController::class, 'index'])->name('dashboard.peminjaman');
+Route::get('/dashboard/pengembalian', [App\Http\Controllers\dashboard\PengembalianController::class, 'index'])->name('dashboard.pengembalian');
+Route::get('/dashboard/users', [App\Http\Controllers\dashboard\UserController::class, 'index'])->name('dashboard.users');
+
+//buku
+Route::get('/dashboard/books', [App\Http\Controllers\dashboard\BukuController::class, 'index'])->name('dashboard.books');
+Route::get('/dashboard/books/create', [App\Http\Controllers\dashboard\BukuController::class, 'create'])->name('dashboard.books.create');
+Route::get('/dashboard/books/edit/{buku}', [App\Http\Controllers\dashboard\BukuController::class, 'edit'])->name('dashboard.books.edit');
+Route::put('/dashboard/books/edit/{buku}', [App\Http\Controllers\dashboard\BukuController::class, 'update'])->name('dashboard.books.update');
+Route::post('/dashboard/books', [App\Http\Controllers\dashboard\BukuController::class, 'store'])->name('dashboard.books.store');
+Route::delete('/dashboard/books/{buku}', [App\Http\Controllers\dashboard\BukuController::class, 'destroy'])->name('dashboard.books.delete');
+
+//movie
+Route::get('/dashboard/movies', [App\Http\Controllers\dashboard\MovieController::class, 'index'])->name('dashboard.movies');
+Route::get('/dashboard/movies/create', [App\Http\Controllers\dashboard\MovieController::class, 'create'])->name('dashboard.movies.create');
+Route::get('/dashboard/movies/edit/{movie}', [App\Http\Controllers\dashboard\MovieController::class, 'edit'])->name('dashboard.movies.edit');
+Route::put('/dashboard/movies/edit/{movie}', [App\Http\Controllers\dashboard\MovieController::class, 'update'])->name('dashboard.movies.update');
+Route::post('/dashboard/movies', [App\Http\Controllers\dashboard\MovieController::class, 'store'])->name('dashboard.movies.store');
+Route::delete('/dashboard/movies/{movie}', [App\Http\Controllers\dashboard\MovieController::class, 'destroy'])->name('dashboard.movies.delete');
 });

@@ -95,7 +95,8 @@ class UserController extends Controller
 
         $validator = VALIDATOR::make($request->all(), [
             'name' =>'required',
-            'email' =>'required|unique:App\Models\User,email,'.$id
+            'email' =>'required',
+            'alamat' =>'required|unique:App\Models\User,alamat,'.$id
         ]);
 
         if($validator->fails()){
@@ -105,6 +106,7 @@ class UserController extends Controller
         }else{
             $user->name = $request->input('name');
             $user->email = $request->input('email');
+            $user->alamat = $request->input('alamat');
             $user->save();
             return redirect('dashboard/users');
         }
