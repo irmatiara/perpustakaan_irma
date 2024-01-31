@@ -34,7 +34,7 @@
                         </div>
                         <div class="form-group">
                             <label for="alamat">Alamat</label>
-                            <input type="text" class="form-control" name="alamat" value="{{ old($user->alamat) ?? $user->alamat }}">
+                            <input type="text" class="form-control" name="alamat" value="{{ $user->alamat }}">
                             @error('alamat')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
