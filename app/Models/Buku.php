@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Buku extends Model
 {
-    use HasFactory;
+    protected $table = 'bukus';
+    protected $primarykey = 'bukuid';
 }
