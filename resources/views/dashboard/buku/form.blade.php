@@ -94,7 +94,7 @@
                         <form action="{{ route('dashboard.books.delete', $buku->bukuid) }}" method="post">
                             @csrf
                             @method('delete')
-                            <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i>Delete</button>
+                            <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                         </form>
                     </div>
                 </div>

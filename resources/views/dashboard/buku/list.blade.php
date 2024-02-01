@@ -46,6 +46,9 @@
                                     <h4><strong>{{ $buku->title }}</strong></h4>
                                 </td>
                                 <td><a href="{{ route('dashboard.books.edit', $buku->bukuid) }}" class="btn btn-success btn-sm"><i class="fas fa-pen"></i></a></td>
+                                <!--menambahkan button baca pdf-->
+                                <!--<a href="{{ asset('storage/admission-document-uploads/' . $bukubuku)}}" target="_blank"> Baca </a>;-->
+                                <td><a href="{{ route('dashboard.books.baca', $buku->bukuid) }}" class="btn btn-success btn-sm">Baca</a></td>
                             </tr>
                         @endforeach
                     </tbody>

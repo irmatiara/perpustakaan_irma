@@ -4,14 +4,15 @@
     <div class="card">
         <div class="card-header">
             <div class="row">
-                <div class="col-8">
+                <div class="col-8 align-self-center">
                     <h3>Users</h3>
-                    <div class="col-4 text-right">
-                        <button class="btn btn-sm text-secondary" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
-                    </div>
+                </div>
+                <div class="col-4 text-right">
+                <button class="btn btn-sm text-secondary" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="fas fa-trash"></i></button>
                 </div>
             </div>
         </div>
+        
 
         <div class="card-body p-2">
             <div class="row">
@@ -34,14 +35,13 @@
                         </div>
                         <div class="form-group">
                             <label for="alamat">Alamat</label>
-                            <input type="text" class="form-control" name="alamat" value="{{ $user->alamat }}">
+                            <input type="text" class="form-control" name="alamat" value="{{ old($user->alamat) ?? $user->alamat }}">
                             @error('alamat')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                        <div class="form-group">
-                            <button type="button" onclick="Window.history.back()" class="btn btn-sm btn-secondary">Cancel</button>
-                            
+                        <div class="form-group mt-4">
+                            <button type="button" onclick="window.history.back()" class="btn btn-sm btn-secondary button-spacing">Cancel</button>
                             <button type="submit" class="btn btn-success btn-sm">Update</button>
                         </div>
                     </form>
@@ -67,7 +67,7 @@
                     <form action="{{ url('dashboard/user/delete/'.$user->id) }}" method="post">
                         @csrf
                         @method('delete')
-                        <button class="btn btn-sm btn-danger">Delete</button>
+                        <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                     </form>
                 </div>
             </div>

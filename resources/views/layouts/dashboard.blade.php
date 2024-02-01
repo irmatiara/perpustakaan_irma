@@ -15,8 +15,8 @@
 
     <!-- Scripts -->
     <head>
-    @vite(['resources/sass/app.scss', 'resources/sass/dashboard.scss', 'resources/js/app.js'])
 </head>
+@vite(['resources/sass/app.scss', 'resources/sass/dashboard.scss', 'resources/js/app.js'])
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
