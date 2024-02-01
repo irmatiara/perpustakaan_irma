@@ -39,8 +39,9 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                        <div class="form-group mt-4">
-                            <button type="button" onclick="window.history.back()" class="btn btn-sm btn-secondary button-spacing">Cancel</button>                            
+                        <div class="form-group">
+                            <button type="button" onclick="Window.history.back()" class="btn btn-sm btn-secondary">Cancel</button>
+                            
                             <button type="submit" class="btn btn-success btn-sm">Update</button>
                         </div>
                     </form>
