@@ -75,12 +75,13 @@
                         <div class="form-group mt-3">
                             <div class="custom-file">
                                 <input type="file" name="pdf" class="custom-file-input">
-                                    <label for="pdf" class="custom-file-label">Tambah PDF</label><br>*Jika tidak ingin merubah pdf kosongkan saja
-                                    @error('pdf')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                <label for="pdf" class="custom-file-label">Tambah PDF</label><br>*Jika tidak ingin merubah pdf kosongkan saja
+                                @error('pdf')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
+
 
                         <div class="form-group mt-4">
                             <button type="button" onclick="window.history.back()" class="btn btn-sm btn-secondary button-spacing">Cancel</button>

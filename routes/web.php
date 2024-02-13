@@ -49,7 +49,7 @@ Route::post('/dashboard/books', [App\Http\Controllers\dashboard\BukuController::
 Route::delete('/dashboard/books/{bukubuku}', [App\Http\Controllers\dashboard\BukuController::class, 'destroy'])->name('dashboard.books.delete');
 
 //baca
-Route::get('/dashboard/books/baca/{bukubuku}', [App\Http\Controllers\dashboard\BukuController::class, 'index'])->name('dashboard.books.baca');
+Route::get('/dashboard/books/{buku}/baca', 'App\Http\Controllers\dashboard\BukuController@baca')->name('dashboard.books.baca');
 
 //movie
 Route::get('/dashboard/movies', [App\Http\Controllers\dashboard\MovieController::class, 'index'])->name('dashboard.movies');
@@ -60,5 +60,5 @@ Route::post('/dashboard/movies', [App\Http\Controllers\dashboard\MovieController
 Route::delete('/dashboard/movies/{movie}', [App\Http\Controllers\dashboard\MovieController::class, 'destroy'])->name('dashboard.movies.delete');
 
 //buka pdf
-Route::get('/admin/showPDF/{$type}/{$fileName}','BukuController@pdf');
+//Route::get('/admin/showPDF/{$type}/{$fileName}','BukuController@pdf');
 });

@@ -7,8 +7,7 @@ use App\Models\Bukubuku;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use File;
-use Response;
+use Illuminate\Support\Facades\Response;
 
 class BukuController extends Controller
 {
@@ -63,7 +62,7 @@ class BukuController extends Controller
             'title'         => 'required|unique:App\Models\Bukubuku,title',
             'description'   => 'required',
             'thumbnail'     => 'required|image',
-            'pdf'           => 'mimes:doc,pdf,docx,png,jpeg,jpg',
+            'pdf'           => 'mimes:pdf', // Hanya izinkan file dengan ekstensi .pdf
             'penulis'       => 'required',
             'penerbit'      => 'required',
             'tahun_terbit'  => 'required',
@@ -86,7 +85,6 @@ class BukuController extends Controller
             $bukubuku->title = $request->input('title');
             $bukubuku->description = $request->input('description');
             $bukubuku->thumbnail = $filename; //Ganti dengan nama file yang baru diupload
-            $bukubuku->pdf;
             $bukubuku->penulis = $request->input('penulis');
             $bukubuku->penerbit = $request->input('penerbit');
             $bukubuku->tahun_terbit = $request->input('tahun_terbit');
@@ -96,6 +94,16 @@ class BukuController extends Controller
                         ->route('dashboard.books')
                         ->with('message', __('message.store', ['title'=>$request->input('title')]));
         }
+
+        $pdf = $request->file('pdf');
+        $pdfFileName = null;
+
+        if ($pdf) {
+            $pdfFileName = time() . '.' . $pdf->getClientOriginalExtension();
+            Storage::disk('local')->putFileAs('public/pdf', $pdf, $pdfFileName);
+        }
+
+        $bukubuku->pdf = $pdfFileName;
     }
 
     /**
@@ -140,7 +148,7 @@ class BukuController extends Controller
             'title'         => 'required|unique:App\Models\Bukubuku,title,'.$bukubuku->bukuid,
             'description'   => 'required',
             'thumbnail'     => 'image',
-            'resume'        => 'mimes:doc,pdf,docx,png,jpeg,jpg',
+            'pdf'           => 'mimes:pdf', // Hanya izinkan file dengan ekstensi .pdf
             'penulis'       => 'required',
             'penerbit'      => 'required',
             'tahun_terbit'  => 'required'
@@ -161,7 +169,6 @@ class BukuController extends Controller
                 $filename = time() . '.' . $image->getClientOriginalExtension();
                     Storage::disk('local')->putFileAs('public/buku', $image, $filename);
                 $bukubuku->thumbnail = $filename; //Ganti dengan nama file yang baru diupload
-                $bukubuku->resume;
             }
             $bukubuku->title = $request->input('title');
             $bukubuku->description = $request->input('description');
@@ -173,6 +180,13 @@ class BukuController extends Controller
             return redirect()
                         ->route('dashboard.books')
                         ->with('message', __('message.update', ['title'=>$request->input('title')]));
+        }
+
+        if ($request->hasFile('pdf')) {
+            $pdf = $request->file('pdf');
+            $pdfFileName = time() . '.' . $pdf->getClientOriginalExtension();
+            Storage::disk('local')->putFileAs('public/pdf', $pdf, $pdfFileName);
+            $bukubuku->pdf = $pdfFileName;
         }
     }
 
@@ -191,4 +205,11 @@ class BukuController extends Controller
                 ->route('dashboard.books')
                 ->with('message', __('message.delete', ['title' => $title]));
     }
+
+    public function baca(Bukubuku $buku)
+    {
+        $pdfPath = storage_path('app/public/pdf/' . $buku->pdf);
+        return response()->file($pdfPath);
+    }
+
 }

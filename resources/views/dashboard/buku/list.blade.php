@@ -50,9 +50,8 @@
                                 <!--<th>{{ ($bukubuku->currentPage() -1 ) * $bukubuku->perPage() + $loop->iteration }}</th>-->
                                 <td class="col-thumbnail">
                                     <img src="{{asset('storage/buku/'.$buku->thumbnail)}}" class="img-fluid">
+                                    <td><a href="{{ route('dashboard.books.baca', $buku->bukuid) }}" class="btn btn-success btn-sm" target="_blank">Baca</a></td>
                                 </td>
-                                <!--menambahkan button baca pdf-->
-                                <td><a href="{{ route('dashboard.books.baca', $buku->bukuid) }}" class="btn btn-success btn-sm">Baca</a></td>
                                 <td>
                                     <h4><strong>{{ $buku->title }}</strong></h4>
                                 </td>
