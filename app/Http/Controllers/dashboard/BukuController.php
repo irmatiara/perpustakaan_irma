@@ -7,6 +7,8 @@ use App\Models\Bukubuku;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use File;
+use Response;
 
 class BukuController extends Controller
 {
@@ -57,17 +59,18 @@ class BukuController extends Controller
      */
     public function store(Request $request)
     {
-        //$validator = Validator::make($request->all(), [
-            //'title'         => 'required|unique:App\Models\Bukubuku,title',
-           // 'description'   => 'required',
-           // 'thumbnail'     => 'required|pdf',
-           // 'penulis'       => 'required',
-           // 'penerbit'      => 'required',
-           // 'tahun_terbit'  => 'required',
-        //]);
         $validator = Validator::make($request->all(), [
-            'thumbnail'   => 'mimes:doc,pdf,docx'
+            'title'         => 'required|unique:App\Models\Bukubuku,title',
+            'description'   => 'required',
+            'thumbnail'     => 'required|image',
+            'pdf'           => 'mimes:doc,pdf,docx,png,jpeg,jpg',
+            'penulis'       => 'required',
+            'penerbit'      => 'required',
+            'tahun_terbit'  => 'required',
         ]);
+        //$validator = Validator::make($request->all(), [
+            //'thumbnail'   => 'mimes:doc,pdf,docx,png,jpeg,jpg'
+        //]);
 
         if ($validator->fails()) {
             return redirect()
@@ -76,19 +79,22 @@ class BukuController extends Controller
                 ->withInput();
         } else {
             $bukubuku = new Bukubuku(); //Tambahkan ini untuk membuat objek Buku
-            $pdf = $request->file('thumbnail');
-            $filename = time() . '.' .$pdf->getClientOriginalExtension();
-            Storage::disk('local')->putFileAs('public/buku', $pdf, $filename);
+            $image = $request->file('thumbnail');
+            $filename = time() . '.' .$image->getClientOriginalExtension();
+            Storage::disk('local')->putFileAs('public/buku', $image, $filename);
 
             $bukubuku->title = $request->input('title');
             $bukubuku->description = $request->input('description');
             $bukubuku->thumbnail = $filename; //Ganti dengan nama file yang baru diupload
+            $bukubuku->pdf;
             $bukubuku->penulis = $request->input('penulis');
             $bukubuku->penerbit = $request->input('penerbit');
             $bukubuku->tahun_terbit = $request->input('tahun_terbit');
             $bukubuku->save();
 
-            return redirect()->route('dashboard.books');
+            return redirect()
+                        ->route('dashboard.books')
+                        ->with('message', __('message.store', ['title'=>$request->input('title')]));
         }
     }
 
@@ -130,18 +136,18 @@ class BukuController extends Controller
      */
     public function update(Request $request, Bukubuku $bukubuku)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'title'         => 'required|unique:App\Models\Bukubuku,title,'.$bukubuku->bukuid,
+            'description'   => 'required',
+            'thumbnail'     => 'image',
+            'resume'        => 'mimes:doc,pdf,docx,png,jpeg,jpg',
+            'penulis'       => 'required',
+            'penerbit'      => 'required',
+            'tahun_terbit'  => 'required'
+        ]);
         //$validator = Validator::make($request->all(), [
-         //   'title'         => 'required|unique:App\Models\Bukubuku,title,'.$bukubuku->bukuid,
-         //   'description'   => 'required',
-          //  'thumbnail'     => 'pdf',
-          //  'penulis'       => 'required',
-          //  'penerbit'      => 'required',
-          //  'tahun_terbit'  => 'required'
-       // ]);
-       $validator = Validator::make($request->all(), [
-        'resume'   => 'mimes:doc,pdf,docx'
-    ]);
+            //'resume'   => 'mimes:doc,pdf,docx,png,jpeg,jpg'
+        //]);
 
         if ($validator->fails()) {
             return redirect()
@@ -151,10 +157,11 @@ class BukuController extends Controller
         } else {
             //$buku = new Buku(); //Tambahkan ini untuk membuat objek Buku
             if($request->hasFile('thumbnail')){
-                $pdf = $request->file('thumbnail');
-                $filename = time() . '.' . $pdf->getClientOriginalExtension();
-                    Storage::disk('local')->putFileAs('public/buku', $pdf, $filename);
+                $image = $request->file('thumbnail');
+                $filename = time() . '.' . $image->getClientOriginalExtension();
+                    Storage::disk('local')->putFileAs('public/buku', $image, $filename);
                 $bukubuku->thumbnail = $filename; //Ganti dengan nama file yang baru diupload
+                $bukubuku->resume;
             }
             $bukubuku->title = $request->input('title');
             $bukubuku->description = $request->input('description');
@@ -163,7 +170,9 @@ class BukuController extends Controller
             $bukubuku->tahun_terbit = $request->input('tahun_terbit');
             $bukubuku->save();
 
-            return redirect()->route('dashboard.books');
+            return redirect()
+                        ->route('dashboard.books')
+                        ->with('message', __('message.update', ['title'=>$request->input('title')]));
         }
     }
 
@@ -175,9 +184,11 @@ class BukuController extends Controller
      */
     public function destroy(bukubuku $bukubuku)
     {
-        //
+        $title = $bukubuku->title;
+
         $bukubuku->delete();
         return redirect()
-                ->route('dashboard.books');
+                ->route('dashboard.books')
+                ->with('message', __('message.delete', ['title' => $title]));
     }
 }

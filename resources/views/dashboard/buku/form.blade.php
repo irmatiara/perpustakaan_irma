@@ -29,6 +29,7 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+
                         <div class="form-group">
                             <label for="penulis">Penulis</label>
                             <input type="text" class="form-control @error('penulis') {{'is-invalid'}} @enderror" name="penulis" value="{{old('penulis') ?? $buku->penulis ?? ''}}">
@@ -36,6 +37,7 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+
                         <div class="form-group">
                             <label for="penerbit">Penerbit</label>
                             <input type="text" class="form-control @error('penerbit') {{'is-invalid'}} @enderror" name="penerbit" value="{{old('penerbit') ?? $buku->penerbit ?? ''}}">
@@ -43,6 +45,7 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+
                         <div class="form-group">
                             <label for="tahun_terbit">Tahun_terbit</label>
                             <input type="text" class="form-control @error('tahun_terbit') {{'is-invalid'}} @enderror" name="tahun_terbit" value="{{old('tahun_terbit') ?? $buku->tahun_terbit ?? ''}}">
@@ -50,6 +53,7 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+
                         <div class="form-group">
                             <label for="description">Description</label>
                             <textarea name="description" class="form-control @error('description') {{'is-invalid'}} @enderror">{{old('description') ?? $buku->description ?? ''}}</textarea>
@@ -57,16 +61,27 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                        <div class="form-group mt-3">
 
+                        <div class="form-group mt-3">
                             <div class="custom-file">
-                                    <input type="file" name="thumbnail" class="custom-file-input">
-                                    <label for="thumbnail" class="custom-file-label">Thumbnail</label><br>*Jika tidak ingin merubah thumbnail kosongkan saja
+                                <input type="file" name="thumbnail" class="custom-file-input">
+                                    <label for="thumbnail" class="custom-file-label">Tambah Gambar</label><br>*Jika tidak ingin merubah gambar kosongkan saja
                                     @error('thumbnail')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                             </div>
                         </div>
+
+                        <div class="form-group mt-3">
+                            <div class="custom-file">
+                                <input type="file" name="pdf" class="custom-file-input">
+                                    <label for="pdf" class="custom-file-label">Tambah PDF</label><br>*Jika tidak ingin merubah pdf kosongkan saja
+                                    @error('pdf')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                            </div>
+                        </div>
+
                         <div class="form-group mt-4">
                             <button type="button" onclick="window.history.back()" class="btn btn-sm btn-secondary button-spacing">Cancel</button>
                             <button type="submit" class="btn btn-success btn-sm">{{$button}}</button>

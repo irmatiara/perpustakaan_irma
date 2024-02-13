@@ -5,6 +5,15 @@
         <a href="{{route('dashboard.books.create')}}" class="btn btn-primary">+ Buku</a>
     </div>
 
+    @if(session()->has('message'))
+    <div class="alert alert-success">
+        <strong>{{session()->get('message')}}</strong>
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+    </div>
+    @endif
+
     <div class="card">
         <div class="card-header">
             <div class="row">
@@ -42,13 +51,13 @@
                                 <td class="col-thumbnail">
                                     <img src="{{asset('storage/buku/'.$buku->thumbnail)}}" class="img-fluid">
                                 </td>
+                                <!--menambahkan button baca pdf-->
+                                <td><a href="{{ route('dashboard.books.baca', $buku->bukuid) }}" class="btn btn-success btn-sm">Baca</a></td>
                                 <td>
                                     <h4><strong>{{ $buku->title }}</strong></h4>
                                 </td>
                                 <td><a href="{{ route('dashboard.books.edit', $buku->bukuid) }}" class="btn btn-success btn-sm"><i class="fas fa-pen"></i></a></td>
-                                <!--menambahkan button baca pdf-->
                                 <!--<a href="{{ asset('storage/admission-document-uploads/' . $bukubuku)}}" target="_blank"> Baca </a>;-->
-                                <td><a href="{{ route('dashboard.books.baca', $buku->bukuid) }}" class="btn btn-success btn-sm">Baca</a></td>
                             </tr>
                         @endforeach
                     </tbody>

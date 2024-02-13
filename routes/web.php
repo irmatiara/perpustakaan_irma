@@ -58,4 +58,7 @@ Route::get('/dashboard/movies/edit/{movie}', [App\Http\Controllers\dashboard\Mov
 Route::put('/dashboard/movies/edit/{movie}', [App\Http\Controllers\dashboard\MovieController::class, 'update'])->name('dashboard.movies.update');
 Route::post('/dashboard/movies', [App\Http\Controllers\dashboard\MovieController::class, 'store'])->name('dashboard.movies.store');
 Route::delete('/dashboard/movies/{movie}', [App\Http\Controllers\dashboard\MovieController::class, 'destroy'])->name('dashboard.movies.delete');
+
+//buka pdf
+Route::get('/admin/showPDF/{$type}/{$fileName}','BukuController@pdf');
 });
