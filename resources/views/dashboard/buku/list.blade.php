@@ -54,6 +54,11 @@
                                 </td>
                                 <td>
                                     <h4><strong>{{ $buku->title }}</strong></h4>
+
+                                    <br>Penulis     : {{ $buku->penulis }}
+                                    <br>Tahun_terbit: {{ $buku->tahun_terbit }}
+                                    <br>Penerbit    : {{ $buku->penerbit }}
+                                    <br>Sinopsis    : {{ $buku->sinopsis }}
                                 </td>
                                 <td><a href="{{ route('dashboard.books.edit', $buku->bukuid) }}" class="btn btn-success btn-sm"><i class="fas fa-pen"></i></a></td>
                                 <!--<a href="{{ asset('storage/admission-document-uploads/' . $bukubuku)}}" target="_blank"> Baca </a>;-->

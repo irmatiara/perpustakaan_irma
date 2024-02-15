@@ -62,7 +62,7 @@ class BukuController extends Controller
             'title'         => 'required|unique:App\Models\Bukubuku,title',
             'description'   => 'required',
             'thumbnail'     => 'required|image',
-            'pdf'           => 'mimes:pdf', // Hanya izinkan file dengan ekstensi .pdf
+            'pdf'           => 'required|mimes:pdf', // Hanya izinkan file dengan ekstensi .pdf dan wajib diunggah
             'penulis'       => 'required',
             'penerbit'      => 'required',
             'tahun_terbit'  => 'required',
@@ -73,13 +73,13 @@ class BukuController extends Controller
 
         if ($validator->fails()) {
             return redirect()
-                ->route('dashboard.books.create')
-                ->withErrors($validator)
-                ->withInput();
+                ->route('dashboard.books.create');
+                //->withErrors($validator)
+                //->withInput();
         } else {
             $bukubuku = new Bukubuku(); //Tambahkan ini untuk membuat objek Buku
             $image = $request->file('thumbnail');
-            $filename = time() . '.' .$image->getClientOriginalExtension();
+            $filename = time() . '.' . $image->getClientOriginalExtension();
             Storage::disk('local')->putFileAs('public/buku', $image, $filename);
 
             $bukubuku->title = $request->input('title');
@@ -88,22 +88,23 @@ class BukuController extends Controller
             $bukubuku->penulis = $request->input('penulis');
             $bukubuku->penerbit = $request->input('penerbit');
             $bukubuku->tahun_terbit = $request->input('tahun_terbit');
-            $bukubuku->save();
+
+            $pdf = $request->file('pdf');
+            $pdfFileName = time() . '.' . $pdf->getClientOriginalExtension();
+            Storage::disk('local')->putFileAs('public/pdf', $pdf, $pdfFileName);
+
+            $bukubuku->pdf = $pdfFileName;
 
             return redirect()
                         ->route('dashboard.books')
                         ->with('message', __('message.store', ['title'=>$request->input('title')]));
+
+                    $bukubuku->save();
+
+            return redirect()->route('dashboard.books');
         }
 
-        $pdf = $request->file('pdf');
-        $pdfFileName = null;
-
-        if ($pdf) {
-            $pdfFileName = time() . '.' . $pdf->getClientOriginalExtension();
-            Storage::disk('local')->putFileAs('public/pdf', $pdf, $pdfFileName);
-        }
-
-        $bukubuku->pdf = $pdfFileName;
+        
     }
 
     /**
@@ -208,7 +209,7 @@ class BukuController extends Controller
 
     public function baca(Bukubuku $buku)
     {
-        $pdfPath = storage_path('app/public/pdf/' . $buku->pdf);
+        $pdfPath = storage_path('app/public/storage/pdf/' . $buku->pdf);
         return response()->file($pdfPath);
     }
 
