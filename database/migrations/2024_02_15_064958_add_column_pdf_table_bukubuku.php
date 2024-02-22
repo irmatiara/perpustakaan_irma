@@ -15,7 +15,7 @@ return new class extends Migration
     {
         //
         Schema::table('bukubuku', function(blueprint $table){
-            $table->softDeletes('pdf');
+            $table->string('pdf');
         });
     }
 

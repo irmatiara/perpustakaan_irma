@@ -24,7 +24,9 @@ class BukuController extends Controller
 
         $bukubuku = $bukubuku->when($q, function($query) use ($q) {
                 return $query->where('title', 'like', '%' .$q. '%')
-                             ->orwhere('description', 'like', '%' .$q. '%');
+                             ->orwhere('description', 'like', '%' .$q. '%')
+                             ->orwhere('penerbit', 'like', '%' .$q. '%')
+                             ->orwhere('tahun_terbit', 'like', '%' .$q. '%');
             })
 
         ->paginate(10);
@@ -73,9 +75,9 @@ class BukuController extends Controller
 
         if ($validator->fails()) {
             return redirect()
-                ->route('dashboard.books.create');
-                //->withErrors($validator)
-                //->withInput();
+                ->route('dashboard.books.create')
+                ->withErrors($validator)
+                ->withInput();
         } else {
             $bukubuku = new Bukubuku(); //Tambahkan ini untuk membuat objek Buku
             $image = $request->file('thumbnail');
@@ -93,18 +95,14 @@ class BukuController extends Controller
             $pdfFileName = time() . '.' . $pdf->getClientOriginalExtension();
             Storage::disk('local')->putFileAs('public/pdf', $pdf, $pdfFileName);
 
-            $bukubuku->pdf = $pdfFileName;
+            $bukubuku->pdf = $pdfFileName; //simpan nama file PDF ke dalam atribut 'pdf'
+
+            $bukubuku->save();
 
             return redirect()
-                        ->route('dashboard.books')
-                        ->with('message', __('message.store', ['title'=>$request->input('title')]));
-
-                    $bukubuku->save();
-
-            return redirect()->route('dashboard.books');
+                ->route('dashboard.books')
+                ->with('message', __('message.store', ['title'=>$request->input('title')]));
         }
-
-        
     }
 
     /**
@@ -209,7 +207,7 @@ class BukuController extends Controller
 
     public function baca(Bukubuku $buku)
     {
-        $pdfPath = storage_path('app/public/storage/pdf/' . $buku->pdf);
+        $pdfPath = storage_path('app/public/pdf/' . $buku->pdf);
         return response()->file($pdfPath);
     }
 

@@ -59,6 +59,11 @@ Route::put('/dashboard/movies/edit/{movie}', [App\Http\Controllers\dashboard\Mov
 Route::post('/dashboard/movies', [App\Http\Controllers\dashboard\MovieController::class, 'store'])->name('dashboard.movies.store');
 Route::delete('/dashboard/movies/{movie}', [App\Http\Controllers\dashboard\MovieController::class, 'destroy'])->name('dashboard.movies.delete');
 
-//buka pdf
-//Route::get('/admin/showPDF/{$type}/{$fileName}','BukuController@pdf');
+//kategoribuku
+Route::get('/dashboard/kategoribuku', [App\Http\Controllers\dashboard\KategoriBukuController::class, 'index'])->name('dashboard.kategoribuku');
+Route::get('/dashboard/kategoribuku/create', [App\Http\Controllers\dashboard\KategoriBukuController::class, 'create'])->name('dashboard.kategoribuku.create');
+Route::get('/dashboard/kategoribuku/edit/{kategoribuku}', [App\Http\Controllers\dashboard\KategoriBukuController::class, 'edit'])->name('dashboard.kategoribuku.edit');
+Route::put('/dashboard/kategoribuku/edit/{kategoribuku}', [App\Http\Controllers\dashboard\KategoriBukuController::class, 'update'])->name('dashboard.kategoribuku.update');
+Route::post('/dashboard/kategoribuku', [App\Http\Controllers\dashboard\KategoriBukuController::class, 'store'])->name('dashboard.kategoribuku.store');
+Route::delete('/dashboard/kategoribuku', [App\Http\Controllers\dashboard\KategoriBukuController::class, 'destroy'])->name('dashboard.kategoribuku.delete');
 });

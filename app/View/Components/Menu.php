@@ -39,15 +39,15 @@ class Menu extends Component
                 'route' => 'dashboard',
                 'icon'  => 'fa-solid fa-house-chimney'
             ],
-            //[
-                //'label' => 'Movie',
-                //'route' => 'dashboard.movies',
-                //'icon'  => 'fa-solid fa-users-viewfinder'
-            //],
             [
                 'label' => 'Buku',
                 'route' => 'dashboard.books',
                 'icon'  => 'fa-solid fa-book-bookmark'
+            ],
+            [
+                'label' => 'Kategori Buku',
+                'route' => 'dashboard.kategoribuku',
+                'icon'  => 'fa-solid fa-cubes-stacked'
             ],
             [
                 'label' => 'Peminjaman',
