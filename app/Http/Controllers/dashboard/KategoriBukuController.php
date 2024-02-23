@@ -5,7 +5,6 @@ namespace App\Http\Controllers\dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\KategoriBuku;
 use Illuminate\Http\Request;
-//use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class KategoriBukuController extends Controller
@@ -22,7 +21,7 @@ class KategoriBukuController extends Controller
         $active = 'Kategoribuku';
 
         $kategoribuku = $kategoribuku->when($q, function($query) use ($q) {
-                return $query->where('kategoriid', 'like', '%' .$q. '%');
+                return $query->where('namakategori', 'like', '%' .$q. '%');
             })
 
         ->paginate(10);
@@ -40,11 +39,11 @@ class KategoriBukuController extends Controller
      */
     public function create()
     {
-        $active = 'Kategoribuku';
+        $active = 'Kategori Buku';
         return view('dashboard/kategoribuku/form', [
             'active' => $active,
             'button' =>'Create',
-            'url'    =>'dashboard.kategoribuku.store',
+            'url'    =>'dashboard.kategoribuku.store'
         ]);
     }
 
@@ -57,21 +56,22 @@ class KategoriBukuController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'namakategori'=> 'required|unique:App\Models\KategoriBuku,namakategori',
+            'namakategori' => 'required|unique:App\Models\KategoriBuku,namakategori',       
         ]);
-
         if ($validator->fails()) {
             return redirect()
                 ->route('dashboard.kategoribuku.create')
                 ->withErrors($validator)
                 ->withInput();
-       } else {
-        $kategori = New Kategori(); //Tambahkan ini untuk membuat objek Kategori Buku
-        $kategori->namakategori = $request->input('namakategori');
-        $kategori->save();
+        } else {
+            $kategori = new KategoriBuku(); //Tambahkan ini untuk membuat objek KategoriBuku
+            $kategori->namakategori = $request->input('namakategori');
+            $kategori->save();
 
-        return redirect()->route('dashboard.kategoribuku');
-       }
+            return redirect()
+                ->route('dashboard.kategoribuku')
+                ->with('message', __('message.store', ['namakategori'=>$request->input('namakategori')]));
+        }
     }
 
     /**
@@ -91,9 +91,15 @@ class KategoriBukuController extends Controller
      * @param  \App\Models\KategoriBuku  $kategoriBuku
      * @return \Illuminate\Http\Response
      */
-    public function edit(KategoriBuku $kategoriBuku)
+    public function edit(KategoriBuku $kategori)
     {
-        //
+        $active = 'Kategori Buku';
+        return view('dashboard/kategoribuku/form', [
+            'active'         => $active,
+            'KategoriBuku'   => $kategori,
+            'button'         =>'Update',        
+            'url'            =>'dashboard.kategoribuku.update'
+        ]);
     }
 
     /**
@@ -103,9 +109,26 @@ class KategoriBukuController extends Controller
      * @param  \App\Models\KategoriBuku  $kategoriBuku
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, KategoriBuku $kategoriBuku)
+    public function update(Request $request, KategoriBuku $kategori)
     {
-        //
+        $validator = Validator::make($request->all(), [
+        'namakategori' => 'required|unique:App\Models\KategoriBuku,namakategori,'.$kategori->kategoriid,  
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->route('dashboard.kategoribuku.update')
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            //$kategori = new KategoriBuku(); //Tambahkan ini untuk membuat objek KategoriBuku
+            $kategori->namakategori = $request->input('namakategori');
+            $kategori->save();
+
+            return redirect()
+                ->route('dashboard.kategoribuku')
+                ->with('message', __('message.store', ['namakategori'=>$request->input('namakategori')]));
+        }
     }
 
     /**

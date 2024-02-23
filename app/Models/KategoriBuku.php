@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class KategoriBuku extends Model
 {
     protected $table = 'kategoribuku';
-    protected $primarykey = 'kategoriid';
+    protected $primaryKey = 'kategoriid';
 }

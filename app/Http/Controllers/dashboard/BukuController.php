@@ -69,9 +69,6 @@ class BukuController extends Controller
             'penerbit'      => 'required',
             'tahun_terbit'  => 'required',
         ]);
-        //$validator = Validator::make($request->all(), [
-            //'thumbnail'   => 'mimes:doc,pdf,docx,png,jpeg,jpg'
-        //]);
 
         if ($validator->fails()) {
             return redirect()
@@ -152,9 +149,6 @@ class BukuController extends Controller
             'penerbit'      => 'required',
             'tahun_terbit'  => 'required'
         ]);
-        //$validator = Validator::make($request->all(), [
-            //'resume'   => 'mimes:doc,pdf,docx,png,jpeg,jpg'
-        //]);
 
         if ($validator->fails()) {
             return redirect()
