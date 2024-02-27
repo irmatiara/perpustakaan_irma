@@ -41,7 +41,7 @@
         </div>
     </div>
     @if(isset($kategori))
-            <div class="modal fade" id="deleteModal">
+        <div class="modal fade" id="deleteModal">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -62,7 +62,7 @@
                     </div>
                 </div>
             </div>
-            </div>
+        </div>
     @endif
 
 @endsection

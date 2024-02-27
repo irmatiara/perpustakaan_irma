@@ -18,7 +18,7 @@ class KategoriBukuController extends Controller
     {
         $q = $request->input('q');
 
-        $active = 'Kategoribuku';
+        $active = 'Kategori Buku';
 
         $kategoribuku = $kategoribuku->when($q, function($query) use ($q) {
                 return $query->where('namakategori', 'like', '%' .$q. '%');
@@ -56,7 +56,7 @@ class KategoriBukuController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'namakategori' => 'required|unique:App\Models\KategoriBuku,namakategori',       
+            'namakategori' => 'required',       
         ]);
         if ($validator->fails()) {
             return redirect()
@@ -64,9 +64,9 @@ class KategoriBukuController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         } else {
-            $kategori = new KategoriBuku(); //Tambahkan ini untuk membuat objek KategoriBuku
-            $kategori->namakategori = $request->input('namakategori');
-            $kategori->save();
+            $kategoribuku = new KategoriBuku(); //Tambahkan ini untuk membuat objek KategoriBuku
+            $kategoribuku->namakategori = $request->input('namakategori');
+            $kategoribuku->save();
 
             return redirect()
                 ->route('dashboard.kategoribuku')
@@ -96,7 +96,7 @@ class KategoriBukuController extends Controller
         $active = 'Kategori Buku';
         return view('dashboard/kategoribuku/form', [
             'active'         => $active,
-            'KategoriBuku'   => $kategori,
+            'kategori'       => $kategori,
             'button'         =>'Update',        
             'url'            =>'dashboard.kategoribuku.update'
         ]);
@@ -112,7 +112,7 @@ class KategoriBukuController extends Controller
     public function update(Request $request, KategoriBuku $kategori)
     {
         $validator = Validator::make($request->all(), [
-        'namakategori' => 'required|unique:App\Models\KategoriBuku,namakategori,'.$kategori->kategoriid,  
+            'namakategori' => 'required|unique:App\Models\KategoriBuku,namakategori,'.$kategori->kategoriid,  
         ]);
 
         if ($validator->fails()) {
@@ -121,13 +121,12 @@ class KategoriBukuController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         } else {
-            //$kategori = new KategoriBuku(); //Tambahkan ini untuk membuat objek KategoriBuku
             $kategori->namakategori = $request->input('namakategori');
             $kategori->save();
 
             return redirect()
                 ->route('dashboard.kategoribuku')
-                ->with('message', __('message.store', ['namakategori'=>$request->input('namakategori')]));
+                ->with('message', __('message.update', ['namakategori'=>$request->input('namakategori')]));
         }
     }
 
@@ -137,8 +136,13 @@ class KategoriBukuController extends Controller
      * @param  \App\Models\KategoriBuku  $kategoriBuku
      * @return \Illuminate\Http\Response
      */
-    public function destroy(KategoriBuku $kategoriBuku)
+    public function destroy(KategoriBuku $kategori)
     {
-        //
+        $title = $kategori->title;
+
+        $kategori->delete();
+        return redirect()
+                ->route('dashboard.kategoribuku')
+                ->with('message', __('message.delete', ['title' => $title]));
     }
 }

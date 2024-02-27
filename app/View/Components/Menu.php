@@ -40,14 +40,25 @@ class Menu extends Component
                 'icon'  => 'fa-solid fa-house-chimney'
             ],
             [
-                'label' => 'Buku',
-                'route' => 'dashboard.books',
-                'icon'  => 'fa-solid fa-book-bookmark'
-            ],
-            [
-                'label' => 'Kategori Buku',
-                'route' => 'dashboard.kategoribuku',
-                'icon'  => 'fa-solid fa-cubes-stacked'
+                'label' => 'Manajemen Buku',
+                'icon'  => 'fa-solid fa-mattress-pillow',
+                'children' => [
+                    [
+                        'label' => 'Buku',
+                        'route' => 'dashboard.books',
+                        'icon'  => 'fa-solid fa-book-bookmark'
+                    ],
+                    [
+                        'label' => 'Kategori Buku',
+                        'route' => 'dashboard.kategoribuku',
+                        'icon'  => 'fa-solid fa-cubes-stacked'
+                    ],
+                    //[
+                      //  'label' => 'Kategori Buku Relasi',
+                      //  'route' => 'dashboard.kategoribukurelasi',
+                      //  'icon'  => 'fa-solid fa-users-viewfinder'
+                    //],
+                ]
             ],
             [
                 'label' => 'Peminjaman',
