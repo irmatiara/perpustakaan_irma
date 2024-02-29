@@ -53,11 +53,11 @@ class Menu extends Component
                         'route' => 'dashboard.kategoribuku',
                         'icon'  => 'fa-solid fa-cubes-stacked'
                     ],
-                    //[
-                      //  'label' => 'Kategori Buku Relasi',
-                      //  'route' => 'dashboard.kategoribukurelasi',
-                      //  'icon'  => 'fa-solid fa-users-viewfinder'
-                    //],
+                    [
+                        'label' => 'Kategori Buku Relasi',
+                        'route' => 'dashboard.kategoribukurelasi',
+                        'icon'  => 'fa-solid fa-users-viewfinder'
+                    ],
                 ]
             ],
             [

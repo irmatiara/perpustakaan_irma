@@ -67,4 +67,12 @@ Route::get('/dashboard/kategoribuku/edit/{kategori}', [App\Http\Controllers\dash
 Route::put('/dashboard/kategoribuku/edit/{kategori}', [App\Http\Controllers\dashboard\KategoriBukuController::class, 'update'])->name('dashboard.kategoribuku.update');
 Route::post('/dashboard/kategoribuku', [App\Http\Controllers\dashboard\KategoriBukuController::class, 'store'])->name('dashboard.kategoribuku.store');
 Route::delete('/dashboard/kategoribuku{kategori}', [App\Http\Controllers\dashboard\KategoriBukuController::class, 'destroy'])->name('dashboard.kategoribuku.delete');
+
+//kategoribukurelasi
+Route::get('/dashboard/kategoribukurelasi', [App\Http\Controllers\dashboard\KategoriBukuRelasiController::class, 'index'])->name('dashboard.kategoribukurelasi');
+Route::get('/dashboard/kategoribukurelasi/create', [App\Http\Controllers\dashboard\KategoriBukuRelasiController::class, 'create'])->name('dashboard.kategoribukurelasi.create');
+Route::get('/dashboard/kategoribukurelasi/edit/{relasi}', [App\Http\Controllers\dashboard\KategoriBukuRelasiController::class, 'edit'])->name('dashboard.kategoribukurelasi.edit');
+Route::put('/dashboard/kategoribukurelasi/edit/{relasi}', [App\Http\Controllers\dashboard\KategoriBukuRelasiController::class, 'update'])->name('dashboard.kategoribukurelasi.update');
+Route::post('/dashboard/kategoribukurelasi', [App\Http\Controllers\dashboard\KategoriBukuRelasiController::class, 'store'])->name('dashboard.kategoribukurelasi.store');
+Route::delete('/dashboard/kategoribukurelasi/{relasi}', [App\Http\Controllers\dashboard\KategoriBukuRelasiController::class, 'destroy'])->name('dashboard.kategoribukurelasi.delete');
 });

@@ -11,15 +11,15 @@
         @if (isset($item['children']))
             <div class="collapse {{ $isActive($item['label']) ? 'show' : '' }}" id="{{ Str::slug($item['label']) }}">
 		            <ul>  
-				            @foreach ($item['children'] as $child)
-				                    <a class="nav-link {{ $isActive($child['label']) ? 'active' : '' }}" href="{{ route($child['route']) }}">
-				                        @if (isset($child['icon'])) <!-- Tambahkan pengecekan untuk kunci 'icon' -->
-				                            <i class="icon-menu {{ $child['icon'] }}"></i>
-				                        @endif
-				                        {{ $child['label'] }}
-				                    </a>
-				             @endforeach
-								</ul>
+				        @foreach ($item['children'] as $child)
+				                <a class="nav-link {{ $isActive($child['label']) ? 'active' : '' }}" href="{{ route($child['route']) }}">
+				                    @if (isset($child['icon'])) <!-- Tambahkan pengecekan untuk kunci 'icon' -->
+				                        <i class="icon-menu {{ $child['icon'] }}"></i>
+				                    @endif
+				                    {{ $child['label'] }}
+				                </a>
+				        @endforeach
+					</ul>
             </div>
         @endif
     @endforeach

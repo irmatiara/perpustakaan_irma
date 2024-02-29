@@ -10,7 +10,7 @@ use App\Models\KategoriBuku; //Impor model KategoriBuku
 class KategoriBukuRelasi extends Model
 {
     protected $table = 'kategoribuku_relasi'; //lakukan penguncian nama table
-    protected $primaryKey = 'Kategoribukuid'; //lakukan penguncian primary key
+    protected $primaryKey = 'kategoribukuid'; //lakukan penguncian primary key
 
     protected $fillable = ['bukuid', 'kategoriid'];
 
