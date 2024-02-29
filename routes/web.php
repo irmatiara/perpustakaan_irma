@@ -75,4 +75,12 @@ Route::get('/dashboard/kategoribukurelasi/edit/{relasi}', [App\Http\Controllers\
 Route::put('/dashboard/kategoribukurelasi/edit/{relasi}', [App\Http\Controllers\dashboard\KategoriBukuRelasiController::class, 'update'])->name('dashboard.kategoribukurelasi.update');
 Route::post('/dashboard/kategoribukurelasi', [App\Http\Controllers\dashboard\KategoriBukuRelasiController::class, 'store'])->name('dashboard.kategoribukurelasi.store');
 Route::delete('/dashboard/kategoribukurelasi/{relasi}', [App\Http\Controllers\dashboard\KategoriBukuRelasiController::class, 'destroy'])->name('dashboard.kategoribukurelasi.delete');
+
+//peminjaman
+Route::get('/dashboard/peminjaman', [App\Http\Controllers\dashboard\PeminjamanController::class, 'index'])->name('dashboard.peminjaman');
+Route::get('/dashboard/peminjaman/create', [App\Http\Controllers\dashboard\PeminjamanController::class, 'create'])->name('dashboard.peminjaman.create');
+Route::get('/dashboard/peminjaman/edit/{pinjam}', [App\Http\Controllers\dashboard\PeminjamanController::class, 'edit'])->name('dashboard.peminjaman.edit');
+Route::put('/dashboard/peminjaman/edit/{pinjam}', [App\Http\Controllers\dashboard\PeminjamanController::class, 'update'])->name('dashboard.peminjaman.update');
+Route::post('/dashboard/peminjaman', [App\Http\Controllers\dashboard\PeminjamanController::class, 'store'])->name('dashboard.peminjaman.store');
+Route::delete('/dashboard/peminjaman/{pinjam}', [App\Http\Controllers\dashboard\PeminjamanController::class, 'destroy'])->name('dashboard.peminjaman.delete');
 });
