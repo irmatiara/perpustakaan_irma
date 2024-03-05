@@ -49,7 +49,7 @@ class PeminjamanController extends Controller
      */
     public function create()
     {
-        $user = User::all(); // Ambil semua data user yang diperlukan
+        $user = User::all(); // Ambil semua data buku yang diperlukan
         $bukubuku = Bukubuku::all(); // Jika diperlukan, ambil juga data buku
         $active = 'Peminjaman';
         return view('dashboard/peminjaman/form', [
@@ -146,7 +146,7 @@ class PeminjamanController extends Controller
             'tanggalpeminjaman'     => 'required',
             'tanggalpengembalian'   => 'required',
             'status_peminjaman'     => 'required',
-            'denda'                 => 'required'
+            'denda'                 => 'required',
         ]);
 
         if ($validator->fails()) {

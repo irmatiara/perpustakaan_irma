@@ -24,7 +24,8 @@ class KategoriBukuRelasiController extends Controller
         $active = 'Kategori Buku Relasi';
 
         $kategoribukurelasi = $kategoribukurelasi->when($q, function($query) use ($q) {
-                    return $query->where('bukuid', 'like', '%' .$q. '%');
+                    return $query->where('bukuid', 'like', '%' .$q. '%')
+                                 ->orwhere('kategoriid', 'like', '%' .$q. '%');
                 })
         
         ->paginate(10);

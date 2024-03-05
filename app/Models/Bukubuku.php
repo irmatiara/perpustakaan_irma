@@ -9,4 +9,9 @@ class Bukubuku extends Model
 {
     protected $table = 'bukubuku';
     protected $primaryKey = 'bukuid';
+
+    public function kategoriBuku()
+    {
+        return $this->belongsTo(KategoriBuku::class, 'kategoriid');
+    }
 }
