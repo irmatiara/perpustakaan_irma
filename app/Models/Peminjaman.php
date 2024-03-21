@@ -18,8 +18,8 @@ class Peminjaman extends Model
         return $this->belongsTo(Bukubuku::class, 'bukuid');
     }
 
-    public function users()
+    public function user()
     {
-        return $this->belongsTo(Users::class, 'id');
+        return $this->belongsTo(User::class, 'id');
     }
 }

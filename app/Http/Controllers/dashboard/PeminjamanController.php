@@ -75,7 +75,7 @@ class PeminjamanController extends Controller
             'tanggalpeminjaman'     => 'required',
             'tanggalpengembalian'   => 'required',
             'status_peminjaman'     => 'required',
-            'denda'                 => 'required',
+            
         ]);
     
         if ($validator->fails()) {
@@ -90,7 +90,7 @@ class PeminjamanController extends Controller
             $pinjam->tanggalpeminjaman = $request->input('tanggalpeminjaman'); 
             $pinjam->tanggalpengembalian = $request->input('tanggalpengembalian');
             $pinjam->status_peminjaman = $request->input('status_peminjaman');
-            $pinjam->denda = $request->input('denda');
+            
             $pinjam->save();
     
             return redirect()
@@ -146,7 +146,7 @@ class PeminjamanController extends Controller
             'tanggalpeminjaman'     => 'required',
             'tanggalpengembalian'   => 'required',
             'status_peminjaman'     => 'required',
-            'denda'                 => 'required',
+            
         ]);
 
         if ($validator->fails()) {
@@ -170,7 +170,7 @@ class PeminjamanController extends Controller
             $pinjam->tanggalpengembalian = $request->input('tanggalpengembalian');
             $pinjam->status_peminjaman = $request->input('status_peminjaman');
             $pinjam->denda = $denda;
-            $pinjam ->save();
+            $pinjam->save();
 
             return redirect()
                         ->route('dashboard.peminjaman')
