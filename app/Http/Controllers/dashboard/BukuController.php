@@ -206,6 +206,7 @@ class BukuController extends Controller
         }
     }
 
+
     /**
      * Remove the specified resource from storage.
      *
@@ -217,9 +218,10 @@ class BukuController extends Controller
         $title = $bukubuku->title;
 
         $bukubuku->delete();
+        $messageKey = 'book.delete';
         return redirect()
                 ->route('dashboard.books')
-                ->with('message', __('message.delete', ['title' => $title]));
+                ->with('message', __('message.book.delete', ['title' => $title]));
     }
 
     public function baca(Bukubuku $buku)

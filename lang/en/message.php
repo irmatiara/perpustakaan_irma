@@ -27,5 +27,11 @@ return [
       'store' => 'Penambahan Data Peminjaman berhasil',
       'update' => 'Pergantian Status Peminjaman berhasil',
       'delete' => 'Penghapusan Data Peminjaman berhasil'
+  ],
+  //user
+  'user' => [
+      'store' => 'Penambahan Data User berhasil',
+      'update' => 'Pergantian Status User berhasil',
+      'delete' => 'Penghapusan Data User berhasil'
   ]
 ];
