@@ -65,19 +65,37 @@ class Menu extends Component
                 'route' => 'dashboard.peminjaman',
                 'icon'  => 'fa-solid fa-handshake-simple'
             ],
-            [
-                'label' => 'Pengembalian',
-                'route' => 'dashboard.pengembalian',
-                'icon'  => 'fa-solid fa-hand-holding-hand'
-            ],
+            //[
+                //'label' => 'Pengembalian',
+                //'route' => 'dashboard.pengembalian',
+                //'icon'  => 'fa-solid fa-hand-holding-hand'
+            //],
             [
                 'label' => 'Users',
-                'route' => 'dashboard.users',
+                'route' => 'dashboard.user',
                 'icon'  => 'fa-solid fa-users-line'
             ]
          ];
+
+        // Logika untuk menyembunyikan menu berdasarkan level pengguna
+        if ($user && $user->level == '1') {
+            // Misalnya, jika level pengguna adalah level1, maka sembunyikan menu Manajemen Buku
+            //Jika ingin menampilkan semua menu kosongkan saja
+        
+        }
+        elseif ($user->level == '2') {
+            unset($menu[3]);
+        }
+        elseif ($user->level == '3') {
+            unset($menu[1]);
+            unset($menu[3]);
+        }
+
+        return $menu;
     }
-    public function isActive($label){
+
+    public function isActive($label)
+    {
         return $label === $this->active;
     }
 }
